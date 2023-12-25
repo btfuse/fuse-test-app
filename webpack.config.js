@@ -1,5 +1,6 @@
 
 const Path = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     // inline is required by Android because sourcemaps aren't loaded in the webview context, but rather the DevConsole
@@ -9,7 +10,8 @@ module.exports = {
     stats: 'errors-warnings',
     output: {
         path: Path.join(__dirname, 'build/'),
-        publicPath: '/assets/'
+        publicPath: '/assets/',
+        filename: 'js/app.js'
     },
     resolve: {
         mainFields: [
@@ -45,5 +47,12 @@ module.exports = {
                 exclude: /node_modules/
             }
         ]
-    }
+    },
+    plugins: [
+        new CopyPlugin({
+            patterns: [
+                { from: './src/index.html', to: './index.html' }
+            ]
+        })
+    ]
 }

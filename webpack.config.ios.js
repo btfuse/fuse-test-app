@@ -1,6 +1,6 @@
 const Path = require('path');
 const config = require('./webpack.config');
 
-config.output.path = Path.join(__dirname, './ios/testapp/assets/');
+config.output.path = Path.resolve(process.env.ASSET_DIR);
 
 module.exports = config;
